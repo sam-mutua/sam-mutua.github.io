@@ -1,0 +1,32 @@
+---
+title: "About this site"
+description: |
+  Course Information
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+# Pre-requisite
+
+Students should have taken the course Foundations for Data Science
+
+# Class Policy
+
+Regular attendance is essential and expected
+
+# Academic Honesty 
+
+Lack of knowledge of the academic honesty policy is not a reasonable explanation for violation
+
+
+# Software
+
+R and Python will be used all through
+
+
+# Assignment template
+
+The assignment template should be accessed here

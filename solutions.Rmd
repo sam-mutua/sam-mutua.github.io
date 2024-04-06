@@ -1,0 +1,157 @@
+---
+title: "Solutions"
+description: |
+  CAT 1 Solutions
+site: distill::distill_website
+---
+
+
+# Remark
+
+The solutions in this CAT were to be made using RMarkdown. To read more about RMarkdown access the information [here](https://ourcodingclub.github.io/tutorials/rmarkdown/)
+
+
+# Question 1
+
+## Define an Algorithm and state the various conditions than an algorithm ought to satisfy
+
+*An algorithm can be defined as any well-defined computational procedure that takes some values as input and produces some values as output*.
+
+Every algorithm must satisfy the following criteria:
+
+- **Input** There are zero or more quantities which are externally supplied
+
+- **Output** At least one quantity is produced
+
+- **Defineteness** If we trace out the instructions of the algorithm, then for all the cases the algorithm will terminate after a finite number of steps
+
+- **Effectiveness** every instruction must be sufficiently basic that it can in principle be carried out by a person using only a pencil and a paper
+
+
+## What are the three components of a function in R
+
+A function has three parts:
+
+- `formals()` the list of arguments that control how you call the function
+
+- `body()` the code inside the function
+
+- `environment()` the data structure that determines how the function finds the values associated with the names
+
+## Give the code on how you create a new column in a dataset in R and Python based on some condition.
+
+### R code
+
+```{r}
+# assuming the data frame named mtcars in R
+
+library(dplyr) # package for manipulation
+
+# divide the disp of the car by 100
+
+mtcars <- mtcars %>% 
+  mutate(disp_10 = disp/10)
+knitr::kable(head(mtcars))
+```
+
+
+### Python code
+
+```{python}
+import pandas as pd
+
+#create DataFrame
+df = pd.DataFrame({'team': ['A', 'A', 'A', 'A', 'B', 'B', 'B', 'B'],
+                   'points': [30, 22, 19, 14, 14, 11, 20, 28]})
+                   
+#add new column to DataFrame that shows mean points by team
+
+df['mean_points'] = df.groupby('team')['points'].transform('mean')
+
+#view updated DataFrame
+
+print(df)
+```
+
+
+#  Question 4 
+
+Pick either one of these dataset from `ggplot2` 
+
+- `midwest` data from midwest counties from the 2000 census
+
+- `economics_long` data on US economic time series
+
+Use this dataset to:
+
+## Plot of counts by discrete variable
+
+### R Code
+
+```{r}
+library(ggplot2)
+
+# visualization on the number of black people in each county
+
+midwest %>% 
+  group_by(state) %>% 
+  summarize(total_bl = sum(popblack)) %>% 
+  ggplot(aes(x = reorder(state, -total_bl), y = total_bl)) + 
+  geom_bar(stat = "identity", width = 0.2, fill = "blue")+
+  theme_minimal() + labs(x = "State", y = "Total Black Population")
+```
+
+### a histogram or density of a continuous variable
+
+```{r}
+# histogram of population density
+
+midwest %>% 
+  ggplot(aes(x = popdensity)) + geom_histogram(bins = 10) +
+  theme_minimal()+labs(x = "Population Density", y = "Frequency")
+
+# density
+
+midwest %>% 
+  ggplot(aes(x = popdensity)) + geom_density(stat = "density", fill = "green") + labs(x = "Population Density", y = "Density")
+```
+
+
+### a summary statistic of a continuous variable for each value of a discrete variable
+
+```{r}
+out <- midwest %>% 
+  group_by(state) %>% 
+  summarize(Mean = mean(poptotal),
+            Median = median(poptotal),
+            Maximum = max(poptotal), 
+            Minimum = min(poptotal))
+knitr::kable(out)
+
+# visual representation
+
+midwest %>% 
+  ggplot(aes(x=state, y = poptotal)) + geom_boxplot()+ theme_minimal()+
+  labs(y = "Population Total")
+```
+
+### a scatterplot of two continuous variables, with a smoothed conditional mean line.
+
+```{r}
+# we explore poppovertyknown and percollege 
+
+midwest %>% 
+  ggplot(aes(x = percollege, y = percbelowpoverty)) + 
+  geom_point() + geom_smooth(method = "lm")
+```
+
+
+
+### three variables.
+
+```{r}
+midwest %>% 
+  ggplot(aes(x = percollege, y = percbelowpoverty,color = state))+
+  geom_point()
+```
+

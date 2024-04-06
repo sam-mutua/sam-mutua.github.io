@@ -1,0 +1,13 @@
+---
+title: "SDS 3122 Programming for Data Science"
+description: |
+  This website gives the materials for the course SDS 3122 Programming for Data Science for Masters Students
+site: distill::distill_website
+---
+
+# General Information
+
+| Instructor | Dr. Mutua Kilai, PhD | Time  | 4.00PM - 7.00Pm EAT |
+|------------|----------------------|-------|---------------------|
+| Day        | Thursday             | Place | Virtual             |
+

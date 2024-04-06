@@ -1,0 +1,15 @@
+name: "PDS3122"
+title: "Programming For Data Science"
+description: |
+  Programming For Data Science
+output_dir: "docs"
+theme: theme.css
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Solutions"
+      href: solutions.html
+output: distill::distill_article
